@@ -1,0 +1,7 @@
+<h1> {{ student.name }}</h1>
+<h3>{{ student.department }}</h3>
+
+{% for field in student.profile_set.all %}
+    <p>{{ field.internship }}</p>
+    <p>{{ field.experience }}</p>
+{% endfor %}
