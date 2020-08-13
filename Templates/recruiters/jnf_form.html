@@ -1,0 +1,42 @@
+{% extends 'recruiters.html' %}
+{% block head %}
+{% endblock head %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+	
+	<div class = "jnf" >
+		<div class = "jnf_header"> Job Notification Form </div>
+		<div class = "jnf_body">
+			<div class = "jnf_company">
+				{% if request.company.name %}
+				<span class = "name" > {{ request.company.name }} </span>
+				{% endif %}
+				{% if request.company.registered_address %}
+				<div > {{ request.company.registered_address }} </div>
+				{% endif %}
+				{% if request.company.email %}
+				<div > {{ request.company.email }} </div>
+				{% endif %}
+				{% if request.company.telephone %}
+				<div > {{ request.company.telephone }} </div>
+				{% endif %}
+				{% if request.company.sector %}
+				<div > {{ request.company.sector }} </div>
+				{% endif %}
+				{% if request.company.industry %}
+				<div > {{ request.company.industry }} </div>
+				{% endif %}
+				{% if request.company.website %}
+				<a href = "{{ request.company.website }}" style = "display: block;"> Website </a>
+				{% endif %}
+			</div>
+				<form method = "POST" class = "job" >
+					{% csrf_token %}
+					{{ form.as_p }}
+					<input type = "submit" value = "Create"/>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

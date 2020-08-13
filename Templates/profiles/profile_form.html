@@ -1,0 +1,37 @@
+{% extends 'profiles.html' %}
+{% load tags %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+<form method="post">
+	<div class = "profile">
+		{% csrf_token %}
+		<div class = "profileStudent">
+			<div class = "profileStudent">
+				{% if profile.student %}
+				<div class = "name"> {{profile.student.user.get_full_name}} </div>
+				<div class = "department"> {{profile.student.get_department_display}} </div>
+					{% if profile.student.photograph %}
+						<div style = "text-align: center; display : block;"> <img src = "{{ profile.student.photograph|as_image_uri:'jpeg'}}" class = "image" /> </div>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+		<div class = "profileDetail">
+			{% for field in form %}
+				<div class = "profileSubhead"> {{ field.label }} </div>
+				<div class = "profileSection" >
+					{{ field.errors }} {{ field }}
+					{% if field.help_text %} {{ field.help_text }} {% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<input type = "submit" value = "Submit" />
+</form>
+{{asd}}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}

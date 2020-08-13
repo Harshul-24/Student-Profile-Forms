@@ -1,0 +1,35 @@
+{% extends 'profiles.html' %}
+{% block head %}
+{% load tags %}
+{% endblock head %}
+{% block content %}
+<div class = "profile content">
+	<div class = "contextMenu" >
+		<a href="{{profile.get_absolute_url}}"> View profile </a>
+		<a href="{% url 'profiles:update_profile' profile.pk %}"> Update Profile</a>
+	</div>
+	{% if profile.student %}
+		<span class = "name"> {{profile.student.user.get_full_name}} </span>
+		<span class = "department"> {{profile.student.get_department_display}} </span>
+		{% if profile.student.photograph %}
+			<span style = "text-align: center; display : block;"> <img src = "{{profile.student.photograph|as_image_uri:'jpeg'}}" class = "image" /> </span>
+		{% endif %}
+	{% endif %}
+	{% if profile.skills %}
+		<span class = "subhead"> Skills </span>
+		<span class = "section">{{ profile.skills}} </span>
+	{% endif %}
+	{% if profile.experience %}
+		<span class = "subhead"> Experience </span>
+		<span class = "section">{{ profile.experience}} </span>
+	{% endif %}
+	{% if profile.achievements %}
+		<span class = "subhead"> Achievements </span>
+		<span class = "section">{{ profile.achievements}} </span>
+	{% endif %}
+	{% if profile.nonScholastics %}
+		<span class = "subhead"> Non Scholastics</span>
+		<span class = "section">{{ profile.nonScholastics}} </span>
+	{% endif %}
+</div>
+{% endblock content %}

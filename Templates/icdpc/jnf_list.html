@@ -1,0 +1,32 @@
+{% extends 'icdpc.html' %}
+{% block head %}
+{% endblock head %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+	<form method = "POST">
+		{% csrf_token %}
+		{{ form.as_p }}
+		{{ form.object_id }}
+		<div id = "submitButton" onclick = "send('recruiters', 'jnf')" > Click here to submit</div>
+	</form>
+	{% for object in object_list %}
+		<div class = "jnf object" id = "object{{object.id}}" pk = "{{object.id}}" onclick = "select()">
+			<span id = "id" > {{object.id }}</span>
+			<span id = "min_ctc" > {{object.min_ctc }}</span>
+			<span id = "city" > {{object.city }}</span>
+		</div>
+	{% endfor %}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+<script>
+	// var objects = document.getElementsByClassName("object");
+	// for( var i = 0 ; i < objects.length ; i++){
+	// 	objects[i].addEventListener("click", function(){
+	// 		document.getElementById("id_object_id").setAttribute("value", this.getAttribute("pk"));
+	// 	});
+	// }
+</script>
+{% endblock script %}

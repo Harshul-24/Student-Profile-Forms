@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+{% load tags %}
+<html>
+    <head>
+        <link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Corbel:b|Droid"/>
+        {% block head %}
+        <title>
+        </title>
+        {% endblock head %}
+    </head>
+    <body>
+        <div class = "menuWrapper">
+            {% block home %}
+            {% endblock home %}
+            {% if request.user.is_authenticated %} 
+            <a class = "menu" id = "logout" href="{% url 'accounts:logout' %}"> Logout </a>
+            <div class = "menu" id = "welcome">
+                Welcome, {{ request.user.first_name }} <br/>
+                Email: {{ request.user.email }}
+            </div>
+            {% else %}
+            <a class = "menu" id = "login" href="{% url 'accounts:login' %}"> Login </a>
+            {% endif %}
+            {% block menu %}
+            {% endblock menu %}
+        </div>
+        <div class = "contentWrapper">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>
+<style>
+    .contentWrapper {
+        display: block;
+        position: relative;
+        left: 25%;
+        height: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        top: 0;
+    }
+    .menu {
+        display: block;
+        background-color: #888888dd;
+        color: #ffffffdd;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 18px;
+        user-select: none;
+    }
+    a.menu{
+        text-decoration: none;
+        text-align: right;
+    }
+    .menu:hover{
+        background-color: #444444;
+    }
+    .menuWrapper {
+        display: block;
+        position: relative;
+        width: 20%;
+        margin-left: 0px;
+        margin-right: 0px;
+        transition: width 0.8s ease;
+        -moz-transition: width 0.8s ease;
+        -webkit-transition: width 0.8s ease;
+        font-family: 'Segoe UI';
+        z-index: 1;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        left: 0;
+        height: 100%;
+    }
+    .contextMenu{
+        display: none;
+        position: absolute;
+        background-color: #3070ffb0;
+        width: 300px;
+        height: 145px;
+        padding: 0px;
+        justify-items: center;
+        z-index: 1;
+        display: none;
+    }
+    .contextMenu a{
+        display: flex;
+        justify-items: center;
+        justify-self: center;
+        flex: 50%;
+        align-items: center;
+        text-decoration: none;
+        color: #ffffff;
+    }
+    .contextMenu a:hover{
+        background-color: #3070ffc0;
+    }
+    .contextMenu.show{
+        display: flex;
+    }
+    .object .selected{
+        outline: 1px solid black;
+    }
+    .image {
+        height: 150px;
+        max-width: 200px;
+    }
+    .profile{
+        display: flex;
+        font-size: 18px;
+        width: 600px;
+        align-items: stretch;
+        border: solid 1px #448FA6;
+        align-content: center;
+        min-height: 300px;
+        position: relative;
+        margin: 30px;
+    }
+    .profileStudent{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        flex-basis: 260px;
+        font-family: 'Corbel';
+        align-items: center;
+        justify-content: center;
+        color: #448FA6;
+    }
+    .profileStudent div{
+        padding: 0 0 4px 0;
+        flex: 0 0 auto;
+    }
+    .profileDetail{
+        flex-basis: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #FFFFFF;
+        background-color: #448FA6;
+    }
+    .profileSubhead{
+        background-color: #448FA6;
+        margin: 4px 15px 0px 15px;
+        border-bottom: solid 1px #FFFFFF;
+        padding: 2px 4px;
+        color: #FFFFFF;
+        font-family: 'Corbel';
+        font-size: 16px;
+        flex: 0 0 auto;
+        display: block;
+    }
+    .profileSection, .profileDetail textarea{
+        font-family: 'Trebuchet MS';
+        display: block;
+        flex: 0 0 auto;
+        margin: 0px 10px 2px 20px;
+        padding: 0;
+        font-size: 14px;
+        color: #FFFFFF;
+        background-color: #FFFFFF00;
+        outline: none;
+        border: none;
+    }
+    #submitButton{
+        color: #FFFFFF;
+        background-color: teal;
+        display: inline-block;
+        padding: 6px;
+    }
+    .log{
+        font-size: 14px;
+        font-family: Georgia;
+        padding: 3px;
+        margin: 3px;
+        border: solid 1px black;
+    }
+    .objectPermission {
+        display: block;
+        padding: 5px;
+        margin: 3px;
+        background-color: teal;
+        color: #FFFFFF;
+        font-size: 14px;
+        border: #888888 solid 1px;
+    }
+    .jnf {
+        display: block;
+        font-family: 'Trebuchet MS';
+        margin: 10px 0 15px;
+    }
+    .jnf_header {
+        background-color: #1873D3;
+        color: #FFFFFF;
+        font-size: 32px;
+        padding: 20px;
+    }
+    .jnf_company {
+        left: 0px;
+        flex: 250px;
+    }
+    .jnf .job{
+        flex: 500px;
+    }
+    .jnf .job div{
+        border-bottom: solid 2px #1873D3;
+        padding-bottom: 4px;
+    }
+    .jnf_body{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .jnf_body div{
+        margin: 10px;
+    }
+    .jnf_company .name{
+        font-size: 24px;
+        color: #1873D3;
+    }
+    .jnf_company a {
+        background-color: #1873D3;
+        padding : 10px;
+        font-size : 14px;
+        font-family: monospace;
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+    </style>
+<script>
+    var contextMenuList = document.getElementsByClassName("contextMenu");
+    for( var i = 0 ; i < contextMenuList.length ; i++){
+        contextMenuList[i].parentElement.addEventListener("click", function(){
+            this.firstElementChild.classList.toggle("show");
+        });
+    }
+    function send(app, model){
+        var xhr = new XMLHttpRequest();
+        formdata = new FormData();
+        formdata.append("app_label", app);
+        formdata.append("model", model);
+        formdata.append("field", document.getElementById("id_field").value);
+        formdata.append("update", document.getElementById("id_update").value);
+        formdata.append("pk", document.getElementById("id_object_id").getAttribute("value"));
+        formdata.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value)
+        xhr.onreadystatechange = function(data){
+            if(xhr.readyState == 4){
+                var jsondata = JSON.parse(xhr.responseText);
+                update(jsondata);
+            }
+        };
+        xhr.open("POST", "/icdpc/update_and_log");
+        xhr.send(formdata);
+    }
+    function update(data){
+        obj = document.getElementsByClassName("object")["object" + data.data['id']].children;
+        for (key in data.data){
+            try{
+                obj[key].innerHTML = data.data[key]
+            } catch(e){
+            }
+        }
+    }
+    function select(object){
+        document.getElementById("id_object_id").setAttribute("value", object.getAttribute("pk"));
+        const els = document.getElementsByClassName("selected");
+        for ( var i = 0 ; i < els.length ; i++){
+            els[i].classList.remove("selected");
+        }
+        object.classList.add("selected");
+    }
+    try{
+        document.getElementById("id_field").addEventListener("change", function(){
+            const id = document.getElementById("id_object_id").getAttribute("value");
+            var object = document.getElementsByClassName("object")["object"+id];
+            var update = document.getElementById("id_update");
+            var item = object.children[this.value];
+            update.innerHTML = item.innerHTML.trim();
+        });
+    }catch(e){
+    }
+    document.getElementsByClassName("menuButton")[0].addEventListener("click", function(){
+        var items = this.children;
+        for( var i = 0 ; i < items.length; i ++){
+            items[i].classList.toggle("on");
+        }
+        document.getElementsByClassName("menuWrapper")[0].style.width = 400 + "px";
+        document.getElementsByClassName("contentWrapper")[0].leftMargin = 400 + "px";
+    });
+</script>
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}   

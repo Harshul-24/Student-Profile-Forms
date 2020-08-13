@@ -1,0 +1,19 @@
+{% extends 'accounts.html' %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+<form method = "POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type = "submit" value = "Login"/>
+</form>
+{% endblock content %}
+{% block extra_menu %}
+<a href = "{% url 'accounts:register' %}" class = "menu"> Register </a>
+<a href = "{% url 'accounts:oauth2' %}" class = "menu" id = "loginButton">
+	<span id = "GSign" > G </span>
+	Login with google
+</a>
+{% endblock extra_menu %}
+{% block script %}
+{% endblock script %}

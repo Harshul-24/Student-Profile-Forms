@@ -1,0 +1,15 @@
+{% extends 'icdpc.html' %}
+{% block head %}
+{% endblock head %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+{% for object in object_list %}
+	<div class = "log">
+		{{ object.user }} changed {{object.content_type }} object id {{ object.object_id }} at field : {{ object.field }} 
+		<div class = "logHeader" >{{ object.field }}</div>
+		from <div class = "logFrom"> {{ object.original }}</div>
+		to <div class = "logTo"> {{ object.update }} </div>
+	</div>
+{% endfor %}
+{% endblock content %}

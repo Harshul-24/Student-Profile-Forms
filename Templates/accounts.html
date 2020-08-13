@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+{% endblock content %}
+{% block menu %}
+<a class = "menu" href = "{% url 'accounts:home' %}" > Home </a>
+{% if request.user.is_authenticated %}
+<a class = "menu" href = "{% url 'accounts:password_change' %}"> Change Password </a>
+<a class = "menu" href = "{% url 'accounts:update' %}"> Update My info </a>
+{% endif %}
+<a class = "menu" href = "{% url 'accounts:password_reset' %}"> Reset Password </a>
+	{% block extra_menu %}
+	{% endblock extra_menu %}
+{% endblock menu %}
+{% block style %}
+<style>
+	form{
+		display: table;
+	}
+	form p{
+		display: table-row;
+	}
+	form label{
+		text-transform: uppercase;
+		font-family: 'Georgia';
+	}
+	form p *{
+		padding: 3px;
+		margin: 3px;
+		display: table-cell;
+		width: 150px;
+		height: 30px;
+		vertical-align: middle;
+	}
+	#loginButton {
+		color: black;
+		background-color: white;
+		display: inline-block;
+		box-shadow: 1px 1px 1px 0.5px #cccccccc, -1px -1px 1px 1px #cccccccc;
+		text-align: center;
+		position: relative;
+		vertical-align: middle;
+	}
+	#GSign{
+		background: conic-gradient(from 60deg at 40% 40%, #E43E2B 60deg, #3B7DED 60deg 180deg, #2BA443 180deg 240deg, #F0B501 240deg 300deg);
+		height: inherit;
+		width: 60px;
+		font-size: 28	px;
+		font-family: 'Century Gothic';
+		font-weight: 900;
+		background-clip: text;
+		color:transparent;
+		-webkit-background-clip: text;
+		display: inline-block;
+	}
+</style>
+{% endblock style %}

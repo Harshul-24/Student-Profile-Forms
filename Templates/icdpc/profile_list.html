@@ -1,0 +1,48 @@
+{% extends 'icdpc.html' %}
+{% load tags %}
+{% block head %}
+{% endblock head %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+	<form method = "POST" >
+		{% csrf_token %}
+		{{ form.as_p }}
+		<div id = "submitButton" onclick = "send('profiles', 'profile')"> Click here to submit </div>
+	</form>
+	{% for object in object_list %}
+	<div class = "profile" >
+		<div class = "profileStudent">
+			{% if object.student %}
+			<div class = "name"> {{object.student.user.get_full_name}} </div>
+			<div class = "department"> {{object.student.get_department_display}} </div>
+				{% if object.student.photograph %}
+					<span style = "text-align: center; display : block;"> <img src = "{{ object.student.photograph|as_image_uri:'jpeg'}}" class = "image" /> </span>
+				{% endif %}
+			{% endif %}
+		</div>
+		<div class = "profileDetail object" id = "object{{object.id}}" onclick = "select(this);" pk = "{{object.id}}">
+			{% if object.skills %}
+				<div class = "profileSubhead" > Skills </div>
+				<div class = "profileSection" id = "skills" >{{ object.skills }} </div>
+			{% endif %}
+			{% if object.experience %}
+				<div class = "profileSubhead" > Experience </div>
+				<div class = "profileSection" id = "experience" >{{ object.experience }} </div>
+			{% endif %}
+			{% if object.achievements %}
+				<div class = "profileSubhead" > Achievements </div>
+				<div class = "profileSection" id = "achievements">{{ object.achievements }} </div>
+			{% endif %}
+			{% if object.nonScholastics %}
+				<div class = "profileSubhead" > Non Scholastics</div>
+				<div class = "profileSection" id = "nonScholastics" >{{ object.nonScholastics }} </div>
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}
