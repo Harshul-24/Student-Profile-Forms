@@ -1,0 +1,62 @@
+{% extends 'recruiters.html' %}
+{% block head %}
+{% endblock head %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+{% if object_list %}
+	{% for jnf in object_list %}
+	<div class = "jnf" >
+		<div class = "jnf_header"> Job Notification Form </div>
+		<div class = "jnf_body">
+			<div class = "jnf_company">
+				{% if request.company.name %}
+				<span class = "name" > {{ request.company.name }} </span>
+				{% endif %}
+				{% if request.company.registered_address %}
+				<div > {{ request.company.registered_address }} </div>
+				{% endif %}
+				{% if request.company.email %}
+				<div > {{ request.company.email }} </div>
+				{% endif %}
+				{% if request.company.telephone %}
+				<div > {{ request.company.telephone }} </div>
+				{% endif %}
+				{% if request.company.sector %}
+				<div > {{ request.company.sector }} </div>
+				{% endif %}
+				{% if request.company.industry %}
+				<div > {{ request.company.industry }} </div>
+				{% endif %}
+				{% if request.company.website %}
+				<a href = "{{ request.company.website }}" style = "display: block;"> Website </a>
+				{% endif %}
+			</div>
+			<div class = "job">
+				{% if jnf.designation %}
+				<div > Designation : {{ jnf.designation }}</div>
+				{% endif %}
+				{% if jnf.skills_required %}
+				<div > Skills Required: {{ jnf.skills_required }} </div>
+				{% endif %}
+				{% if jnf.city %}
+				<div > City(ies) of Posting: {{ jnf.city }} </div>
+				{% endif %}
+				{% if jnf.min_ctc %}
+				<div > Minimum CTC Offered (Annual): {{ jnf.min_ctc }} </div>
+				{% endif %}
+				{% if jnf.remarks %}
+				<div > Remarks : {{ jnf.remarks }} </div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+{% else %}
+Looks like it is empty here. Create a new jnf to submit
+{% endif %}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}

@@ -1,0 +1,15 @@
+{% extends 'profiles.html' %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+<form enctype = "multipart/form-data" method="post">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value = "Create"/>
+</form>
+{{ request.student }}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}

@@ -1,0 +1,29 @@
+{% extends 'icdpc.html' %}
+{% block head %}
+{% endblock head %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+	<form method = "POST">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type = "submit" value = "Update"/>
+	</form>
+	{% for object in object_list %}
+		<div class = "objectPermission object" id = "object{{object.id}}" pk = "{{object.id}}" >
+			{{ object.user.get_full_name }} {{ object.permission.name|lower }} for {{ object.permission.content_type.model }}
+			{% if object.permission.content_type.model == "profile" %}
+				{{ object.object.skills }}
+			{% endif %}
+			{% if object.permission.content_type.model == "jnf" %}
+				{{ object.object.designation }}
+			{% endif %}
+		</div>
+	{% endfor %}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+<script>
+</script>
+{% endblock script %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% block head %}
+{% endblock head %}
+{% block home %}
+<a class = "menu" href = "{% url 'recruiters:home' %}"> Home </a>
+{% endblock home %}
+{% block menu %}
+	{% if request.rep %}
+		<div class = "menu">
+			{{ request.rep.name }}
+			{{ request.rep.contact }}
+		</div>
+		<a class = "menu" href = "{% url 'recruiters:rep_update' request.rep.id %}"> Update my info </a>
+	{% endif %}
+	{% if request.company %}
+		<div class = "menu">
+			{{ request.company.name }} <br/>
+			{{ request.company.telephone }} <br/>
+			{{ request.company.address }}
+			{% if request.company.logo %}
+				<img class = "image" src = "{{ request.company.logo|as_image_uri:'jpeg' }}"/>
+			{% endif %}
+		</div>
+	{% endif %}
+	<a class = "menu" href = "{% url 'recruiters:jnf_create' %}"> Create a JNF </a>
+	{% block extra_menu %}
+	{% endblock extra_menu %}
+{% endblock menu %}
+{% block content %}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}

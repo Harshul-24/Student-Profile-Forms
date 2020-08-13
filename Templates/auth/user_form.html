@@ -1,0 +1,10 @@
+{% extends 'accounts.html' %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+<form method = "POST">
+	{% csrf_token %}
+	{{ form.as_table }}
+	<input type = "submit" value = "Update Info" />
+</form>
+{% endblock content %}

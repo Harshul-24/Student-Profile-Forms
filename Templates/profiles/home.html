@@ -1,0 +1,44 @@
+{% extends 'profiles.html' %}
+{% block head %}
+{% endblock head %}
+{% load tags %}
+{% block content %}
+	{% for profile in request.profiles %}
+	<div class = "profile" >
+			<div class = "contextMenu" >
+				<a href="{{profile.get_absolute_url}}"> View profile </a>
+				<a href="{% url 'profiles:update_profile' profile.pk %}"> Update Profile</a>
+			</div>
+			<div class = "profileStudent">
+				{% if profile.student %}
+				<div class = "name"> {{profile.student.user.get_full_name}} </div>
+				<div class = "department"> {{profile.student.get_department_display}} </div>
+					{% if profile.student.photograph %}
+						<span style = "text-align: center; display : block;"> <img src = "{{ profile.student.photograph|as_image_uri:'jpeg'}}" class = "image" /> </span>
+					{% endif %}
+				{% endif %}
+			</div>
+			<div class = "profileDetail">
+				{% if profile.skills %}
+					<div class = "profileSubhead"> Skills </div>
+					<div class = "profileSection">{{ profile.skills }} </div>
+				{% endif %}
+				{% if profile.experience %}
+					<div class = "profileSubhead"> Experience </div>
+					<div class = "profileSection">{{ profile.experience }} </div>
+				{% endif %}
+				{% if profile.achievements %}
+					<div class = "profileSubhead"> Achievements </div>
+					<div class = "profileSection">{{ profile.achievements }} </div>
+				{% endif %}
+				{% if profile.nonScholastics %}
+					<div class = "profileSubhead"> Non Scholastics</div>
+					<div class = "profileSection">{{ profile.nonScholastics }} </div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+{% endblock content %}
+{% block extra_menu %}
+{% endblock extra_menu %}

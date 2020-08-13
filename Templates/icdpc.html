@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock head %}
+{% block menu %}
+	<a class = "menu" href = "{% url 'icdpc:profiles' %}"> Profiles</a>
+	<a class = "menu" href = "{% url 'icdpc:jnfs' %}"> JNFS </a>
+	<a class = "menu" href = "{% url 'icdpc:perms' %}"> Permissions </a>
+	<a class = "menu" href = "{% url 'icdpc:home' %}"> Home </a>
+	<a class = "menu" href = "{% url 'icdpc:logs' %}"> Logs </a>
+	{% block extra_menu %}
+	{% endblock extra_menu %}
+{% endblock menu %}
+{% block content %}
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}

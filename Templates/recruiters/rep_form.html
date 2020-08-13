@@ -1,0 +1,19 @@
+{% extends 'recruiters.html' %}
+{% block head %}
+{% endblock head %}
+{% block menu %}
+{% endblock menu %}
+{% block extra_menu %}
+{% endblock extra_menu %}
+{% block content %}
+The information you enter over here is only meant for the exclusive use and reference of ICDPC and not for students applying for placements
+<form method = "POST" enctype = "multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type = "submit" value = "Register"/>
+</form>
+{% endblock content %}
+{% block style %}
+{% endblock style %}
+{% block script %}
+{% endblock script %}

@@ -1,0 +1,42 @@
+{% extends 'recruiters.html' %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+{% with jnf=object %}
+	<div class = "jnf" >
+		<div class = "jnf_header"> Job Notification Form </div>
+		<div class = "jnf_body">
+			<div class = "jnf_company">
+				{% if request.company.name %}
+				<span class = "name" > {{ request.company.name }} </span>
+				{% endif %}
+				{% if request.company.registered_address %}
+				<div > {{ request.company.registered_address }} </div>
+				{% endif %}
+				{% if request.company.email %}
+				<div > {{ request.company.email }} </div>
+				{% endif %}
+				{% if request.company.telephone %}
+				<div > {{ request.company.telephone }} </div>
+				{% endif %}
+				{% if request.company.sector %}
+				<div > {{ request.company.sector }} </div>
+				{% endif %}
+				{% if request.company.industry %}
+				<div > {{ request.company.industry }} </div>
+				{% endif %}
+				{% if request.company.website %}
+				<a href = "{{ request.company.website }}" style = "display: block;"> Website </a>
+				{% endif %}
+			</div>
+			<div class = "job">
+				<div > Designation : {{ jnf.designation }}</div>
+				<div > Skills Required: {{ jnf.skills_required }} </div>
+				<div > City(ies) of Posting: {{ jnf.city }} </div>
+				<div > Minimum CTC Offered: {{ jnf.min_ctc }} </div>
+				<div > Remarks : {{ jnf.remarks }} </div>
+			</div>
+		</div>
+	</div>
+{% endwith %}
+{% endblock content %}
